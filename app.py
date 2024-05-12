@@ -10,17 +10,18 @@
     Returns:
         _type_: _description_
 """
-import os
 from flask import Flask, request, jsonify
 import numpy as np
 import joblib
+import gdown
+import os 
 
 from tensorflow import keras
 from tensorflow.keras.preprocessing.text import Tokenizer
 from tensorflow.keras.preprocessing.sequence import pad_sequences
 
 SAVE_MODEL_FOLDER = "models/"
-SAVE_MODEL_FILENAME = "model.pkl"
+SAVE_MODEL_FILENAME = "model.joblib"
 MAX_SEQUENCE_LENGTH = 200
 OOV_TOKEN = "-n-"
 
@@ -41,8 +42,11 @@ def load_model():
     """
     Loads model from Google Drive to query from.
     """
+    
+    if not os.path.exists(SAVE_MODEL_FOLDER):
+        os.mkdir(SAVE_MODEL_FOLDER)
 
-    model = joblib.load(f'{SAVE_MODEL_FOLDER}{SAVE_MODEL_FILENAME}')
+    model = joblib.load(gdown.download(id="1e1FyntLFwb1heG-_64uzxktGtGiD-kHs", output=f'{SAVE_MODEL_FOLDER}{SAVE_MODEL_FILENAME}', quiet=False))
     
     return model
     

@@ -21,6 +21,7 @@ tensorflow-io-gcs-filesystem = [
     { version = "< 0.32.0", markers = "platform_system == 'Windows'" }
 ]
 tensorflow = "~2.16"
+gdown = "^5.2.0"
 
 [build-system]
 requires = ["poetry-core"]
