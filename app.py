@@ -20,23 +20,15 @@ from tensorflow import keras
 from tensorflow.keras.preprocessing.text import Tokenizer
 from tensorflow.keras.preprocessing.sequence import pad_sequences
 
+from ml_lib_remla.preprocessing import Preprocessing
+
+
 SAVE_MODEL_FOLDER = "models/"
 SAVE_MODEL_FILENAME = "model.joblib"
 MAX_SEQUENCE_LENGTH = 200
 OOV_TOKEN = "-n-"
 
 app = Flask(__name__)
-
-
-def preprocess(data):
-    tokenizer = Tokenizer(lower=True, char_level=True, oov_token=OOV_TOKEN)
-    tokenizer.fit_on_texts(data)
-
-    x= pad_sequences(
-        tokenizer.texts_to_sequences(data), maxlen=MAX_SEQUENCE_LENGTH
-    )
-    
-    return x
 
 def load_model():
     """
@@ -51,7 +43,7 @@ def load_model():
     return model
     
 model = load_model()
-
+preprocessor = Preprocessing()
 
 @app.route('/predict', methods=['POST'])
 def predict():
@@ -62,7 +54,8 @@ def predict():
         result (json) : JSON response.
     """
     data = request.json['data']
-    preprocessed_data = preprocess(data)
+
+    preprocessed_data = preprocessor.tokenize_batch(data)
     prediction = model.predict(preprocessed_data)
     prediction = np.array(prediction > 0.5).astype(int)
     result = jsonify({'prediction': prediction.flatten().tolist()})
