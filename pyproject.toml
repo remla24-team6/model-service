@@ -1,0 +1,28 @@
+[tool.poetry]
+name = "model-service"
+version = "0.1.0"
+description = "The model-service represents a wrapper service for the released ML model. It will offer a REST API to expose the model to other components and make it scalable."
+authors = ["Rody Haket <r.haket@student.tudelft.nl>"]
+readme = "README.md"
+package-mode = false
+
+[tool.poetry.dependencies]
+python = ">=3.11,<3.12"
+flask = "^3.0.3"
+autopep8 = "^2.1.0"
+flask-restful = "^0.3.10"
+flask-cors = "^4.0.1"
+pylint = "2.13"
+numpy = "^1.26.4"
+joblib = "^1.4.2"
+tensorflow-intel = { version = "^2.13.0", platform = "win32" }
+tensorflow-io-gcs-filesystem = [
+    { version = "< 0.32.0", markers = "platform_system == 'Windows'" }
+]
+tensorflow = "~2.16"
+gdown = "^5.2.0"
+ml-lib-remla = "^1.0.0"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

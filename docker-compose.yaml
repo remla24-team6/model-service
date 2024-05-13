@@ -1,0 +1,7 @@
+# docker-compose.yaml
+services:
+  web:
+    build: "."
+    ports:
+      - "5000:5000"
+    command: poetry run flask run --host=0.0.0.0
