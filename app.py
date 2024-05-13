@@ -52,18 +52,6 @@ def load_model():
     
 model = load_model()
 
-@app.route('/predict', methods=['GET'])
-def info():
-    """
-    Predict endpoint.
-
-    Returns:
-        result (json) : JSON response.
-    """
-    result = jsonify({
-        'msg': 'GET Request is Not Supported.'
-    })
-    return result
 
 @app.route('/predict', methods=['POST'])
 def predict():
