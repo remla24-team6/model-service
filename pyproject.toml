@@ -22,6 +22,8 @@ tensorflow-io-gcs-filesystem = [
 tensorflow = "~2.16"
 gdown = "^5.2.0"
 ml-lib-remla = "^1.0.0"
+python-dotenv = "^1.0.1"
+flasgger = "^0.9.7.1"
 
 [build-system]
 requires = ["poetry-core"]
