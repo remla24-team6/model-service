@@ -17,34 +17,30 @@ import gdown
 import os 
 
 from tensorflow import keras
-from tensorflow.keras.preprocessing.text import Tokenizer
-from tensorflow.keras.preprocessing.sequence import pad_sequences
 
 from ml_lib_remla.preprocessing import Preprocessing
 
 
 SAVE_MODEL_FOLDER = "models/"
 SAVE_MODEL_FILENAME = "model.joblib"
-MAX_SEQUENCE_LENGTH = 200
-OOV_TOKEN = "-n-"
 
 app = Flask(__name__)
 
-def load_model():
+
+class Inference():
     """
     Loads model from Google Drive to query from.
     """
+    def __init__(self):
+        """
+        Initialises model from Google Drive.
+        """
     
-    if not os.path.exists(SAVE_MODEL_FOLDER):
-        os.mkdir(SAVE_MODEL_FOLDER)
+        if not os.path.exists(SAVE_MODEL_FOLDER):
+            os.mkdir(SAVE_MODEL_FOLDER)
 
-    model = joblib.load(gdown.download(id="1e1FyntLFwb1heG-_64uzxktGtGiD-kHs", output=f'{SAVE_MODEL_FOLDER}{SAVE_MODEL_FILENAME}', quiet=False))
+        self.model = joblib.load(gdown.download(id="1e1FyntLFwb1heG-_64uzxktGtGiD-kHs", output=f'{SAVE_MODEL_FOLDER}{SAVE_MODEL_FILENAME}', quiet=False))        
     
-    return model
-    
-model = load_model()
-preprocessor = Preprocessing()
-
 @app.route('/predict', methods=['POST'])
 def predict():
     """
@@ -56,11 +52,13 @@ def predict():
     data = request.json['data']
 
     preprocessed_data = preprocessor.tokenize_batch(data)
-    prediction = model.predict(preprocessed_data)
+    prediction = inference.model.predict(preprocessed_data)
     prediction = np.array(prediction > 0.5).astype(int)
     result = jsonify({'prediction': prediction.flatten().tolist()})
     return result
 
+inference = Inference()
+preprocessor = Preprocessing()
 
 if __name__ == '__main__':
     app.run(debug=True)
