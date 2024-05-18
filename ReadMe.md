@@ -39,7 +39,7 @@ docker pull ghcr.io/remla24-team6/model-service:latest
 docker run -p 5000:5000 --name model-service -it ghcr.io/remla24-team6/model-service:latest
 ```
 
-2. To bbuild the docker container locally.
+2. To build the docker container locally.
 
 ```
 $ docker-compose build --no-cache

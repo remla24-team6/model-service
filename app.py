@@ -42,7 +42,7 @@ class Inference():
         """
     
         if not os.path.exists(os.getenv('SAVE_MODEL_FOLDER')):
-            os.mkdir(os.getenv('SAVE_MODEL_FILENAME'))
+            os.mkdir(os.getenv('SAVE_MODEL_FOLDER'))
 
         self.model = joblib.load(gdown.download(id=os.getenv('GDRIVE_ID'), output=f'{os.getenv("SAVE_MODEL_FOLDER")}{os.getenv("SAVE_MODEL_FILENAME")}', quiet=False))        
     
