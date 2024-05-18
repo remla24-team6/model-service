@@ -1,4 +1,4 @@
-swagger_template ={
+SWAGGER_TEMPLATE ={
     "swagger": "2.0",
     "info": {
       "title": "Phishing URL Prediction",
@@ -21,7 +21,7 @@ swagger_template ={
     ],
       }
 
-swagger_config = {
+SWAGGER_CONFIG = {
     "headers": [
         ('Access-Control-Allow-Origin', '*'),
         ('Access-Control-Allow-Methods', "GET, POST"),

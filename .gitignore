@@ -11,6 +11,10 @@
 **/models
 
 
+# .flaskenvironment file
+.flaskenv
+**/model/
+
 
 
 # ------------- standard -------------

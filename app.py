@@ -17,19 +17,20 @@ import gdown
 import os 
 from flasgger import Swagger, LazyJSONEncoder
 from flasgger import swag_from
+from pathlib import Path
+from dotenv import load_dotenv
 
+env_path = Path('.', '.flaskenv')
+load_dotenv(dotenv_path=env_path)
 
 from ml_lib_remla.preprocessing import Preprocessing
 
-from config import swagger_template, swagger_config
-from constants import GDRIVE_ID
+from config import SWAGGER_TEMPLATE, SWAGGER_CONFIG
 
-SAVE_MODEL_FOLDER = "models/"
-SAVE_MODEL_FILENAME = "model.joblib"
 
 app = Flask(__name__)
 app.json_encoder = LazyJSONEncoder
-swagger = Swagger(app, template=swagger_template,config=swagger_config)
+swagger = Swagger(app, template=SWAGGER_TEMPLATE,config=SWAGGER_CONFIG)
 
 class Inference():
     """
@@ -40,10 +41,10 @@ class Inference():
         Initialises model from Google Drive.
         """
     
-        if not os.path.exists(SAVE_MODEL_FOLDER):
-            os.mkdir(SAVE_MODEL_FOLDER)
+        if not os.path.exists(os.getenv('SAVE_MODEL_FOLDER')):
+            os.mkdir(os.getenv('SAVE_MODEL_FILENAME'))
 
-        self.model = joblib.load(gdown.download(id=GDRIVE_ID, output=f'{SAVE_MODEL_FOLDER}{SAVE_MODEL_FILENAME}', quiet=False))        
+        self.model = joblib.load(gdown.download(id=os.getenv('GDRIVE_ID'), output=f'{os.getenv("SAVE_MODEL_FOLDER")}{os.getenv("SAVE_MODEL_FILENAME")}', quiet=False))        
     
 @swag_from("docs/predict.yaml" )
 @app.route('/predict', methods=['POST'])
@@ -67,4 +68,4 @@ inference = Inference()
 preprocessor = Preprocessing()
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(host=os.getenv('HOST'), port=os.getenv('PORT'), debug=os.getenv('IS_DEBUG'))
