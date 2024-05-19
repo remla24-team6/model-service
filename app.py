@@ -76,6 +76,7 @@ def add():
     """
     url = request.json['url']
     label = request.json['label']
+    feedback = request.json['feedback']
 
     # Path to the CSV file
     csv_file_path = f"{os.getenv('SAVE_TRAINING_DATA_FOLDER')}{os.getenv('SAVE_TRAINING_DATA_FILENAME')}"
@@ -86,7 +87,7 @@ def add():
     # Append data to the CSV file
     with open(csv_file_path, mode='a', newline='') as file:
         writer = csv.writer(file)
-        writer.writerow([url, label])
+        writer.writerow([url, label, feedback])
 
     return jsonify({'msg': f'Thank you for submitting:\n{url} with label {label}'})
 
