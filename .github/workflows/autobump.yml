@@ -11,7 +11,7 @@ jobs:
         uses: actions/checkout@v2
         with:
           fetch-depth: 0
-          token: ${{ secrets.VERSIONING_TOKEN }} 
+          token: ${{ github.token }} 
 
       - name: Increment version
         run: |
