@@ -18,7 +18,7 @@ To run the model-service locally or when building the Dockerfile, create a `.fla
 IS_DEBUG=               (default: False)
 HOST=                   (default: 0.0.0.0)
 PORT=                   (default: 5000)
-GDRIVE_ID=              (default: "e1FyntLFwb1heG-_64uzxktGtGiD-kHs")
+GDRIVE_ID=              (default: "1e1FyntLFwb1heG-_64uzxktGtGiD-kHs")
 SAVE_MODEL_FOLDER=      ("models/")
 SAVE_MODEL_FILENAME=    ("model.joblib")
 ```
