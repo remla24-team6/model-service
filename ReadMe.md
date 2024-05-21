@@ -104,3 +104,6 @@ $ tree
 │
 └───notebooks
 '''
+
+
+### Developer instructions
