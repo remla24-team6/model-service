@@ -1,7 +1,7 @@
-FROM python:3.11-slim as python-base
+FROM python:3.11-bookworm as python-base
 
 # Configure Poetry
-ENV POETRY_VERSION=1.8.3
+ENV POETRY_VERSION=1.8.2
 ENV POETRY_HOME=/opt/poetry
 ENV POETRY_VENV=/opt/poetry-venv
 ENV POETRY_CACHE_DIR=/opt/.cache
@@ -20,7 +20,7 @@ WORKDIR /app
 
 # Install dependencies
 COPY poetry.lock pyproject.toml ./
-RUN poetry install
+RUN poetry install  --no-interaction --no-cache --no-dev
 
 # Create a new stage from the base python image
 FROM python-base as model-service
