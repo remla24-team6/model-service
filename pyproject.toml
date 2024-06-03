@@ -15,16 +15,6 @@ pylint = "2.13"
 numpy = "^1.26.4"
 joblib = "^1.4.2"
 
-tensorflow-intel = { version = "^2.13.0", platform = "win32" }
-tensorflow-io-gcs-filesystem = [
-    { version = "< 0.32.0", markers = "platform_system == 'Windows'" }
-]
-tensorflow-macos = { version = "^2.15.0", markers = "platform_system=='Darwin' and platform_machine=='arm64'" }
-tensorflow-cpu = [
-    { version = "^2.13.0", platform = "linux", markers = "platform_machine!='arm64' and platform_machine!='aarch64'" },
-    { version = "^2.13.0", platform = "darwin", markers = "platform_machine!='arm64' and platform_machine!='aarch64'" },
-]
-
 gdown = "^5.2.0"
 # ml-lib-remla = "^1.0.0"
 flasgger = "^0.9.7.1"

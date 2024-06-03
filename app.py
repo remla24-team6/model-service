@@ -45,7 +45,7 @@ class Inference():
         if not os.path.exists(os.getenv('SAVE_MODEL_FOLDER')):
             os.mkdir(os.getenv('SAVE_MODEL_FOLDER'))
 
-        self.model = joblib.load(gdown.download(id=os.getenv('GDRIVE_ID'), output=f'{os.getenv("SAVE_MODEL_FOLDER")}{os.getenv("SAVE_MODEL_FILENAME")}', quiet=False))        
+        self.model = None #joblib.load(gdown.download(id=os.getenv('GDRIVE_ID'), output=f'{os.getenv("SAVE_MODEL_FOLDER")}{os.getenv("SAVE_MODEL_FILENAME")}', quiet=False))        
     
 @swag_from("docs/predict.yaml" )
 @app.route('/predict', methods=['POST'])
