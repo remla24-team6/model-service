@@ -15,11 +15,10 @@ pylint = "2.13"
 numpy = "^1.22"
 joblib = "^1.4.2"
 gdown = "^5.2.0"
-# ml-lib-remla = "^1.0.0"
+ml-lib-remla = "^1.1.0"
 flasgger = "^0.9.7.1"
 starlette = "^0.37.2"
 python-dotenv = "^1.0.1"
-# tensorflow = "^1.10.1"
 
 [build-system]
 requires = ["poetry-core"]
