@@ -24,7 +24,7 @@ from dotenv import load_dotenv
 env_path = Path('.', '.flaskenv')
 load_dotenv(dotenv_path=env_path)
 
-# from ml_lib_remla.preprocessing import Preprocessing
+from ml_lib_remla.preprocessing import Preprocessing
 
 from config import SWAGGER_TEMPLATE, SWAGGER_CONFIG
 
@@ -105,7 +105,7 @@ def add():
     return jsonify({'msg': f'Thank you for submitting:\n{url} with label {label}'})
 
 inference = Inference()
-# preprocessor = Preprocessing()
+preprocessor = Preprocessing()
 
 if __name__ == '__main__':
     app.run(host=os.getenv('HOST'), port=os.getenv('PORT'), debug=os.getenv('IS_DEBUG'))
