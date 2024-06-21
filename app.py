@@ -49,7 +49,7 @@ class Inference():
 
 
 @app.route('/test', methods=['GET'])
-def predict():
+def test():
     """
     Test endpoint.
 
