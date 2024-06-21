@@ -44,9 +44,10 @@ class Inference():
     
         if not os.path.exists(os.getenv('SAVE_MODEL_FOLDER')):
             os.mkdir(os.getenv('SAVE_MODEL_FOLDER'))
-
-        self.model = None #joblib.load(gdown.download(id=os.getenv('GDRIVE_ID'), output=f'{os.getenv("SAVE_MODEL_FOLDER")}{os.getenv("SAVE_MODEL_FILENAME")}', quiet=False))        
-
+        try:
+            self.model = joblib.load(gdown.download(id=os.getenv('GDRIVE_ID'), output=f'{os.getenv("SAVE_MODEL_FOLDER")}{os.getenv("SAVE_MODEL_FILENAME")}', quiet=False))        
+        except Exception as e:
+            print(f"An unexpected error occurred: {e}")
 
 @app.route('/test', methods=['GET'])
 def test():
