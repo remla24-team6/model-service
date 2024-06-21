@@ -2,9 +2,11 @@ name: Versioning
 
 on:
   push:
-    branches:
-      - main
-      - "FIX/**"
+    tags:
+      - "v*"
+    # branches:
+    #   - main
+    #   - "FIX/**"
 
 jobs:
   versioning:
