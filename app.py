@@ -15,7 +15,6 @@ import numpy as np
 import joblib
 import gdown
 import os 
-import csv
 from flasgger import Swagger, LazyJSONEncoder
 from flasgger import swag_from
 from pathlib import Path
@@ -94,64 +93,6 @@ def predict():
     result = jsonify({'prediction': prediction.flatten().tolist()})
     return result
 
-
-@swag_from("docs/add.yaml" )
-@app.route('/add', methods=['POST'])
-def add():
-    """
-    description: "This API will be used to add the uploaded URL as potential training data."
-    tags:
-    - name: Add URL
-    consumes:
-    - application/json
-    produces:
-    - application/json
-    parameters:
-    - description: "The body should contain a url containing the url as a string and the label as a string."
-        in: "body"
-        name: "body"
-        schema:
-        title: add
-        type: object
-        properties:
-            array:
-            type: array
-            description: Input Array
-        example:
-            url: "https://google.com"
-            label: "0"
-        required: true
-    responses:
-    "200":
-        description: Successful response
-        schema:
-        title: Valid Prediction Response
-        type: object
-        example:
-            prediction: 0
-    "400":
-        description: Bad request
-        schema:
-        title: Invalid data Key
-        type: object
-
-    """
-    url = request.json['url']
-    label = request.json['label']
-    feedback = request.json['feedback']
-
-    # Path to the CSV file
-    csv_file_path = f"{os.getenv('SAVE_TRAINING_DATA_FOLDER')}{os.getenv('SAVE_TRAINING_DATA_FILENAME')}"
-
-    # Ensure the data directory exists
-    os.makedirs(os.path.dirname(csv_file_path), exist_ok=True)
-
-    # Append data to the CSV file
-    with open(csv_file_path, mode='a', newline='') as file:
-        writer = csv.writer(file)
-        writer.writerow([url, label, feedback])
-
-    return jsonify({'msg': f'Thank you for submitting:\n{url} with label {label}'})
 
 inference = Inference()
 preprocessor = Preprocessing()
