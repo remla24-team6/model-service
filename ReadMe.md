@@ -79,7 +79,7 @@ The response body contains the following:
 
 
 ### Project structure
-''' console
+``` console
 $ tree
 │   .gitignore
 │   app.py
@@ -103,7 +103,7 @@ $ tree
 │       model.joblib
 │
 └───notebooks
-'''
+```
 
 
 ### Developer instructions
