@@ -44,9 +44,23 @@ class Inference():
     
         if not os.path.exists(os.getenv('SAVE_MODEL_FOLDER')):
             os.mkdir(os.getenv('SAVE_MODEL_FOLDER'))
+        try:
+            self.model = joblib.load(gdown.download(id=os.getenv('GDRIVE_ID'), output=f'{os.getenv("SAVE_MODEL_FOLDER")}{os.getenv("SAVE_MODEL_FILENAME")}', quiet=False))        
+        except Exception as e:
+            print(f"An unexpected error occurred: {e}")
 
-        self.model = joblib.load(gdown.download(id=os.getenv('GDRIVE_ID'), output=f'{os.getenv("SAVE_MODEL_FOLDER")}{os.getenv("SAVE_MODEL_FILENAME")}', quiet=False))        
-    
+@app.route('/test', methods=['GET'])
+def test():
+    """
+    Test endpoint.
+
+    Returns:
+        result (json) : JSON response.
+    """
+    result = jsonify({'prediction': "This is a test endpoint"})
+    return result
+
+
 @swag_from("docs/predict.yaml" )
 @app.route('/predict', methods=['POST'])
 def predict():
@@ -158,3 +172,4 @@ preprocessor = Preprocessing()
 
 if __name__ == '__main__':
     app.run(host=os.getenv('HOST'), port=os.getenv('PORT'), debug=os.getenv('IS_DEBUG'))
+    # Testing push
