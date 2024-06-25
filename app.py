@@ -51,10 +51,40 @@ class Inference():
 @app.route('/predict', methods=['POST'])
 def predict():
     """
-    Predict endpoint.
-
-    Returns:
-        result (json) : JSON response.
+    description: "This API will be used to predict the class of the uploaded URL."
+    tags:
+    - name: Classify URL
+    consumes:
+    - application/json
+    produces:
+    - application/json
+    parameters:
+    - description: "The body should contain an array containing the url as a string."
+        in: "body"
+        name: "body"
+        schema:
+        title: predict
+        type: object
+        properties:
+            array:
+            type: array
+            description: Input Array
+        example:
+            data : ["https://google.com"]
+        required: true
+    responses:
+        "200":
+        description: Successful response
+        schema:
+            title: Valid Prediction Response
+            type: object
+            example:
+            prediction: 0
+        "400":
+        description: Bad request
+        schema:
+            title: Invalid data Key
+            type: object
     """
     data = request.json['data']
 
@@ -69,10 +99,42 @@ def predict():
 @app.route('/add', methods=['POST'])
 def add():
     """
-    Add training data.
+    description: "This API will be used to add the uploaded URL as potential training data."
+    tags:
+    - name: Add URL
+    consumes:
+    - application/json
+    produces:
+    - application/json
+    parameters:
+    - description: "The body should contain a url containing the url as a string and the label as a string."
+        in: "body"
+        name: "body"
+        schema:
+        title: add
+        type: object
+        properties:
+            array:
+            type: array
+            description: Input Array
+        example:
+            url: "https://google.com"
+            label: "0"
+        required: true
+    responses:
+    "200":
+        description: Successful response
+        schema:
+        title: Valid Prediction Response
+        type: object
+        example:
+            prediction: 0
+    "400":
+        description: Bad request
+        schema:
+        title: Invalid data Key
+        type: object
 
-    Returns:
-        result (json) : JSON response.
     """
     url = request.json['url']
     label = request.json['label']
