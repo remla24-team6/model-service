@@ -2,8 +2,8 @@
 
 Model-service repository for TU DELFT CS4295 Release Engineering for Machine Learning Applications (2023/24 Q4).
 
-The model-service represents a wrapper service for the released ML model. It will offer a REST API
-to expose the model to other components and make it scalable.
+The model-service represents a wrapper service for the released ML model. It will offer a Flask REST API
+to expose the model to other components and make it scalable. The trained model is fetched from the google drive upon startup. For preprocessing, the ml-lib library is used. On every push with a release tag, this repo should automatically be packaged and released.
 
 ### Setup
 - Create a new virtual environment called `.venv` using `virtualenv .venv`
@@ -23,6 +23,8 @@ SAVE_MODEL_FOLDER=      ("models/")
 SAVE_MODEL_FILENAME=    ("model.joblib")
 ```
 
+
+
 ## Installation instructions
 
 1. Clone the repository.
@@ -32,7 +34,7 @@ $ git clone git@github.com:remla24-team6/model-service.git
 $ cd model-service
 ```
 
-2. To load from thee Github Package registry:
+2. To load from the GitHub Package registry:
 
 ``` console
 docker pull ghcr.io/remla24-team6/model-service:latest
@@ -78,6 +80,7 @@ The response body contains the following:
 ```
 
 
+
 ### Project structure
 ``` console
 $ tree
@@ -105,5 +108,3 @@ $ tree
 └───notebooks
 ```
 
-
-### Developer instructions
