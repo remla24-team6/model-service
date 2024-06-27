@@ -78,33 +78,3 @@ The response body contains the following:
   "prediction": <0|1>
 }
 ```
-
-
-
-### Project structure
-``` console
-$ tree
-│   .gitignore
-│   app.py
-│   config.py
-│   constants.py
-│   docker-compose.yaml
-│   Dockerfile
-│   poetry.lock
-│   pylintrc
-│   pyproject.toml
-│   ReadMe.md
-│
-├───.github
-│   └───workflows
-│           release.yml
-│
-├───docs
-│       predict.yaml
-│
-├───models
-│       model.joblib
-│
-└───notebooks
-```
-
